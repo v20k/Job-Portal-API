@@ -27,4 +27,17 @@ public class ApplicantDAO {
 			return optional.get();
 		}
 	}
+
+	public Applicant deleteApplicant(long applicantId) {
+	    Optional<Applicant> optional = applicantRepo.findById(applicantId);
+		if(optional.isEmpty()) {
+			return null;
+		}else {
+			Applicant applicant = optional.get();
+			applicantRepo.deleteById(applicantId);
+			return applicant;
+		}
+	    
+		
+	}
 }

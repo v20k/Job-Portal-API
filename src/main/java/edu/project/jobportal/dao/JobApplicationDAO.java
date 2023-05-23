@@ -1,6 +1,7 @@
 package edu.project.jobportal.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -22,6 +23,17 @@ public class JobApplicationDAO {
 	public List <JobApplication> getAllJobApplication() {
 		return jobApplicationRepo.getAllJobApplication();
 		
+	}
+
+	public JobApplication deleteJobApplicantion(long jobApplicationId) {
+		Optional<JobApplication> optional = jobApplicationRepo.findById(jobApplicationId);
+		if(optional.isEmpty()) {
+			return null;
+		}else {
+			JobApplication jobApplication = optional.get();
+		jobApplicationRepo.deleteById(jobApplicationId);
+		return jobApplication;
+		}
 	}
 	
 }
