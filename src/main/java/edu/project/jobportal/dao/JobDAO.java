@@ -26,4 +26,14 @@ public class JobDAO {
 			return optional.get();
 		}
 	}
+
+	public Job deleteJob(long jobId) {
+		Optional<Job> optional = jobRepo.findById(jobId);
+		if(optional.isEmpty()) {
+			return null;
+		}else {
+			jobRepo.deleteById(jobId);
+			return optional.get();
+		}
+	}
 }

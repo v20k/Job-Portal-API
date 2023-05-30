@@ -35,5 +35,15 @@ public class JobApplicationDAO {
 		return jobApplication;
 		}
 	}
+
+	public JobApplication findJobApplication(long jobApplicationId) {
+	    Optional<JobApplication> optional = jobApplicationRepo.findById(jobApplicationId);
+		if(optional.isEmpty()) {
+			return null;
+		}else {
+			return optional.get();
+		}
+	    
+	}
 	
 }

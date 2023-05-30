@@ -2,6 +2,7 @@ package edu.project.jobportal.entity;
 
 import java.util.List;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,6 +34,5 @@ public class Applicant {
 	
 	@OneToOne
 	@JoinColumn
-	
 	private Resume resume;
 }

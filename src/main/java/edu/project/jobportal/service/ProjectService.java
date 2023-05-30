@@ -54,8 +54,37 @@ public class ProjectService {
 		}else {
 			throw new ApplicantNotFoundException("applicant is empty");
 		}
+	}
 		
-		
+		public ResponseEntity<ResponseStructure<Resume>> deleteProject(long applicantId,long projectId){
+			Applicant applicant = applicantDAO.findApplicant(applicantId);
+			
+			if(applicant!=null) {
+				Resume existingResume = applicant.getResume();
+				if(existingResume!=null) {
+					Project project = projectDAO.findProject(projectId);
+					if(existingResume.getProjects().contains(project)) {
+						existingResume.getProjects().remove(project);
+					}
+					
+					Resume resume2 = resumeDAO.saveResume(existingResume);
+					
+					projectDAO.deleteProject(projectId);
+					
+					ResponseStructure<Resume> responseStructure=new ResponseStructure<>();
+					responseStructure.setStatusCode(HttpStatus.CREATED.value());
+					responseStructure.setMessage("Deleted Successfully");
+					responseStructure.setData(resume2);
+					
+					return new ResponseEntity<ResponseStructure<Resume>>(responseStructure,HttpStatus.CREATED);
+					
+				}else {
+					throw new ResumeNotFoundException("Resume is Empty");
+					}
+				
+			}else {
+				throw new ApplicantNotFoundException("applicant is empty");
+			}
 		
 		
 		

@@ -27,4 +27,14 @@ public class EmployerDAO {
 			return optional.get();
 		}
 	}
+
+	public Employer deleteEmployer(long employerId) {
+		Optional<Employer> optional = employerRepo.findById(employerId);
+		if(optional.isEmpty()) {
+			return null;
+		}else {
+			employerRepo.deleteById(employerId);
+			return optional.get();
+		}
+	}
 }

@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +26,7 @@ public class EmployerController {
 	
 	@PostMapping
 	public ResponseEntity<ResponseStructure<Employer>> saveEmployer( @RequestBody @Valid Employer employer){
-		return employerService.saveEmployer(employer);
+		return employerService.saveEmployer(employer);                             //this valid goes to exception class where it hits ResponseEntityExceptionHandler and it override handleMethodArgumentNotValid method
 	}
 	
 	@GetMapping
@@ -33,4 +34,8 @@ public class EmployerController {
 		return employerService.findEmployer(employerId);
 	}
 	
+	@DeleteMapping
+	public ResponseEntity<ResponseStructure<Employer>> deleteEmployer(@RequestParam long employerId){
+		return employerService.deleteEmployer(employerId);
+	}
 }

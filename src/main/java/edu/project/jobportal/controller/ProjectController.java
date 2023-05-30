@@ -2,6 +2,7 @@ package edu.project.jobportal.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,11 @@ public class ProjectController {
 	@PostMapping
 	public ResponseEntity<ResponseStructure<Resume>> saveProject(@RequestParam long applicantId,@RequestBody Project project){
 		return projectService.saveProject(applicantId, project);
+	}
+	
+	@DeleteMapping
+	public ResponseEntity<ResponseStructure<Resume>> deleteProject(@RequestParam long applicantId,@RequestParam long projectId){
+		return projectService.deleteProject(applicantId, projectId);
 	}
 	
 }

@@ -16,6 +16,7 @@ import edu.project.jobportal.entity.Job;
 import edu.project.jobportal.entity.JobApplication;
 import edu.project.jobportal.exception.ApplicantNotFoundException;
 import edu.project.jobportal.exception.JobNotFoundException;
+import edu.project.jobportal.exception.jobApplicationNotFoundException;
 import edu.project.jobportal.util.ResponseStructure;
 
 @Service
@@ -80,4 +81,27 @@ public class JobApplicationService {
 		}
 		
 		}
+	
+	public ResponseEntity<ResponseStructure<JobApplication>> deleteJobApplication(long jobApplicationId){
+		JobApplication jobApplication = jobApplicationDAO.findJobApplication(jobApplicationId);
+        if(jobApplication!=null) {
+        	jobApplication.setJob(null);
+        	jobApplication.setApplicant(null);
+        	
+        	jobApplicationDAO.deleteJobApplicantion(jobApplicationId);
+        	
+        	ResponseStructure<JobApplication> responseStructure=new ResponseStructure<>();
+    		responseStructure.setStatusCode(HttpStatus.OK.value());
+    		responseStructure.setMessage("Deleted Successfully");
+    		responseStructure.setData(jobApplication);
+    		return new ResponseEntity<ResponseStructure<JobApplication>>(responseStructure,HttpStatus.OK);
+    	
+        }else {
+        	throw new jobApplicationNotFoundException("JobApplication is Empty");
+        }
+	
+	}
+	
+	
+	
 }
