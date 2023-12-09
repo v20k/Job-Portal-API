@@ -18,6 +18,7 @@ public class JobportalApplication {
 	//testing 4
 	//testing 5
 	//testing 6
+	//testing 7
 	@Bean
 	public ModelMapper getMM() {
 		return new ModelMapper();
