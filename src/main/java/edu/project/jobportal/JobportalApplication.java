@@ -12,6 +12,7 @@ public class JobportalApplication {
 		SpringApplication.run(JobportalApplication.class, args);
 	}
 
+	//testing 
 	@Bean
 	public ModelMapper getMM() {
 		return new ModelMapper();
